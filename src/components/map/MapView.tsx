@@ -175,7 +175,7 @@ const InfrastructureMap = () => {
         case "powerPlant":
           return [255, 0, 0, 0.8]; 
         case "solarFarm":
-          return [255, 215, 0, 0.8]; // Gold for solar
+          return [255, 215, 0, 0.8];
         case "windFarm":
           return [0, 191, 255, 0.8]; // Deep sky blue for wind
         case "substation":
