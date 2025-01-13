@@ -166,6 +166,25 @@ const InfrastructureMap = () => {
 
     map.addMany([linesLayer, substationLayer, powerPlantLayer, renewableLayer]);
 
+    const getSymbolColor = (assetType: string, status: string) => {
+      if (status !== "operational") {
+        return [255, 165, 0, 0.8]; // Orange for maintenance/offline
+      }
+      
+      switch(assetType) {
+        case "powerPlant":
+          return [255, 0, 0, 0.8]; // Red for power plants
+        case "solarFarm":
+          return [255, 215, 0, 0.8]; // Gold for solar
+        case "windFarm":
+          return [0, 191, 255, 0.8]; // Deep sky blue for wind
+        case "substation":
+          return [148, 0, 211, 0.8]; // Dark violet for substations
+        default:
+          return [128, 128, 128, 0.8]; // Gray for unknown
+      }
+    };
+
     powerAssets.forEach((asset) => {
       const point = new Point({
         longitude: asset.location.coordinates[0],
@@ -175,7 +194,7 @@ const InfrastructureMap = () => {
 
       const symbol = new SimpleMarkerSymbol({
         style: "circle",
-        color: asset.type === "powerPlant" ? [255, 0, 0, 0.8] : [0, 255, 0, 0.8],
+        color: getSymbolColor(asset.type, asset.status),
         outline: {
           color: [255, 255, 255],
           width: 1

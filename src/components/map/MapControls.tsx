@@ -35,25 +35,25 @@ const MapControls = ({ onSearch, onFilterChange }: MapControlsProps) => {
     onFilterChange({ types: selectedTypes, statuses: newStatuses });
   };
   return (
-    <div className="absolute top-4 left-4 z-10 bg-white p-4 rounded-lg shadow-lg border border-gray-200">
+    <div className="absolute top-4 left-4 z-10 bg-white p-3 rounded-lg shadow-lg border border-gray-200 text-sm">
       {/* Search Box */}
-      <div className="flex items-center space-x-2 mb-4">
+      <div className="flex items-center mb-3">
         <div className="relative">
           <input
             type="text"
             placeholder="Search assets..."
-            className="pl-8 pr-4 py-2 border rounded-md w-64"
+            className="pl-7 pr-3 py-1.5 border rounded-md w-48 text-sm"
             onChange={(e) => onSearch(e.target.value)}
           />
-          <Search className="absolute left-2 top-2.5 h-4 w-4 text-gray-400" />
+          <Search className="absolute left-2 top-2 h-3.5 w-3.5 text-gray-400" />
         </div>
       </div>
 
       {/* Filter Controls */}
-      <div className="space-y-4">
+      <div className="space-y-3">
         <div>
-          <h3 className="text-sm font-medium mb-2">Asset Type</h3>
-          <div className="space-y-2">
+          <h3 className="text-xs font-medium mb-1.5">Asset Type</h3>
+          <div className="space-y-1.5">
             {["powerPlant", "solarFarm", "windFarm", "substation"].map(
               (type) => (
                 <label key={type} className="flex items-center">
@@ -61,9 +61,9 @@ const MapControls = ({ onSearch, onFilterChange }: MapControlsProps) => {
                     type="checkbox"
                     checked={selectedTypes.includes(type)}
                     onChange={(e) => handleTypeChange(type, e.target.checked)}
-                    className="mr-2"
+                    className="mr-1.5 h-3.5 w-3.5"
                   />
-                  <span className="text-sm">{type}</span>
+                  <span className="text-xs">{type}</span>
                 </label>
               )
             )}
@@ -71,17 +71,17 @@ const MapControls = ({ onSearch, onFilterChange }: MapControlsProps) => {
         </div>
 
         <div>
-          <h3 className="text-sm font-medium mb-2">Status</h3>
-          <div className="space-y-2">
+          <h3 className="text-xs font-medium mb-1.5">Status</h3>
+          <div className="space-y-1.5">
             {["operational", "maintenance", "offline"].map((status) => (
               <label key={status} className="flex items-center">
                 <input
                   type="checkbox"
                   checked={selectedStatuses.includes(status)}
                   onChange={(e) => handleStatusChange(status, e.target.checked)}
-                  className="mr-2"
+                  className="mr-1.5 h-3.5 w-3.5"
                 />
-                <span className="text-sm">{status}</span>
+                <span className="text-xs">{status}</span>
               </label>
             ))}
           </div>
