@@ -292,9 +292,9 @@ const InfrastructureMap = () => {
       }
     });
 
-    const layerList = new LayerList({
-      view: view,
-    });
+    // const layerList = new LayerList({
+    //   view: view,
+    // });
 
     // view.ui.add(layerList, "top-right");
 
