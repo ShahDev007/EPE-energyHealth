@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { Activity, Battery, Zap, AlertTriangle } from 'lucide-react';
+import { Activity, Zap, AlertTriangle } from 'lucide-react';
 import InfrastructureMap from '../../components/map/MapView';
 
 // Simple mock data

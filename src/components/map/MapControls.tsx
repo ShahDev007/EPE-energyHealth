@@ -1,13 +1,13 @@
 // src/components/map/MapControls.tsx
-import React, { useState } from "react";
+import { useState } from "react";
 import { Search } from "lucide-react";
 
 interface MapControlsProps {
   onSearch: (term: string) => void;
-  onFilterChange: (filters: { type?: string[]; status?: string[] }) => void;
+  onFilterChange: (filters: { types: string[]; statuses: string[] }) => void;
 }
 
-const MapControls = ({ onSearch, onFilterChange }) => {
+const MapControls = ({ onSearch, onFilterChange }: MapControlsProps) => {
   const [selectedTypes, setSelectedTypes] = useState<string[]>([
     "powerPlant",
     "solarFarm",

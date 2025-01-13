@@ -5,6 +5,10 @@ import Graphic from "@arcgis/core/Graphic";
 import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer";
 import LayerList from "@arcgis/core/widgets/LayerList";
 import PopupTemplate from "@arcgis/core/PopupTemplate";
+import Polyline from "@arcgis/core/geometry/Polyline";
+import Point from "@arcgis/core/geometry/Point";
+import SimpleMarkerSymbol from "@arcgis/core/symbols/SimpleMarkerSymbol";
+
 import {
   powerAssets,
   PowerAsset,
@@ -40,7 +44,7 @@ const InfrastructureMap = () => {
       center: [-99.7, 31.5], // Centered on Texas
       popup: {
         dockEnabled: false,
-        autoOpenEnabled: true,
+        // autoOpenEnabled: true,
         alignment: "top-center",
         defaultPopupTemplateEnabled: true,
         highlightEnabled: true,
@@ -55,7 +59,7 @@ const InfrastructureMap = () => {
         browserTouchPanEnabled: true,
       },
       highlightOptions: {
-        color: [255, 255, 0, 0.3],
+        // color: [255, 255, 0, 0.3],
         haloOpacity: 0.9,
         fillOpacity: 0.2,
       },
@@ -167,24 +171,25 @@ const InfrastructureMap = () => {
     map.addMany([linesLayer, substationLayer, powerPlantLayer, renewableLayer]);
 
     powerAssets.forEach((asset) => {
-      const point = {
-        type: "point",
+      const point = new Point({
         longitude: asset.location.coordinates[0],
         latitude: asset.location.coordinates[1],
-      };
+        spatialReference: { wkid: 4326 }  // WGS84 spatial reference
+      });
+
+      const symbol = new SimpleMarkerSymbol({
+        style: "circle",
+        color: asset.type === "powerPlant" ? [255, 0, 0, 0.8] : [0, 255, 0, 0.8],
+        outline: {
+          color: [255, 255, 255],
+          width: 1
+        },
+        size: 12
+      });
 
       const graphic = new Graphic({
         geometry: point,
-        symbol: {
-          type: "simple-marker",
-          color:
-            asset.type === "powerPlant" ? [255, 0, 0, 0.8] : [0, 255, 0, 0.8],
-          outline: {
-            color: [255, 255, 255],
-            width: 1,
-          },
-          size: 12,
-        },
+        symbol: symbol,
         attributes: asset,
         popupTemplate: getPopupTemplate(asset), // Attach PopupTemplate
       });
@@ -208,12 +213,12 @@ const InfrastructureMap = () => {
       const toAsset = powerAssets.find((a) => a.id === connection.to);
 
       if (fromAsset && toAsset) {
-        const line = {
-          type: "polyline",
-          paths: [
-            [fromAsset.location.coordinates, toAsset.location.coordinates],
-          ],
-        };
+        const line = new Polyline({
+          paths: [[
+            [fromAsset.location.coordinates[0], fromAsset.location.coordinates[1]],
+            [toAsset.location.coordinates[0], toAsset.location.coordinates[1]]
+          ]]
+        });
 
         const lineSymbol = {
           type: "simple-line",
@@ -299,19 +304,23 @@ const InfrastructureMap = () => {
   }, []);
 
   const handleSearch = (term: string) => {
+    if (!layers.substationLayer || !layers.powerPlantLayer || !layers.renewableLayer) return;
+  
+    const allLayers = [layers.substationLayer, layers.powerPlantLayer, layers.renewableLayer];
+  
     if (!term) {
       // Show all assets
-      Object.values(layers).forEach((layer) => {
-        layer.graphics.forEach((graphic) => {
+      allLayers.forEach(layer => {
+        layer.graphics.forEach(graphic => {
           graphic.visible = true;
         });
       });
       return;
     }
-
+  
     // Search through all graphics
-    Object.values(layers).forEach((layer) => {
-      layer.graphics.forEach((graphic) => {
+    allLayers.forEach(layer => {
+      layer.graphics.forEach(graphic => {
         const attributes = graphic.attributes;
         if (attributes) {
           const match =
@@ -324,30 +333,21 @@ const InfrastructureMap = () => {
   };
 
   const handleFilter = (filters: { types: string[]; statuses: string[] }) => {
-    if (
-      !layers.substationLayer ||
-      !layers.powerPlantLayer ||
-      !layers.renewableLayer
-    )
-      return;
+  if (!layers.substationLayer || !layers.powerPlantLayer || !layers.renewableLayer) return;
 
-    const allLayers = [
-      layers.substationLayer,
-      layers.powerPlantLayer,
-      layers.renewableLayer,
-    ];
-
-    allLayers.forEach((layer) => {
-      layer.graphics.forEach((graphic) => {
-        const attributes = graphic.attributes;
-        if (attributes) {
-          const typeMatch = filters.types.includes(attributes.type);
-          const statusMatch = filters.statuses.includes(attributes.status);
-          graphic.visible = typeMatch && statusMatch;
-        }
-      });
+  const allLayers = [layers.substationLayer, layers.powerPlantLayer, layers.renewableLayer];
+    
+  allLayers.forEach(layer => {
+    layer.graphics.forEach(graphic => {
+      const attributes = graphic.attributes;
+      if (attributes) {
+        const typeMatch = filters.types.includes(attributes.type);
+        const statusMatch = filters.statuses.includes(attributes.status);
+        graphic.visible = typeMatch && statusMatch;
+      }
     });
-  };
+  });
+};
 
   return (
     <div className="relative w-full h-full min-h-[400px]">

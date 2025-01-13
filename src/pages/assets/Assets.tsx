@@ -1,4 +1,4 @@
-import { Zap, Radio, Wind, Sun } from "lucide-react";
+import { Radio, Wind, Sun } from "lucide-react";
 
 const assetData = [
   {
