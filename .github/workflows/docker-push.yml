@@ -23,4 +23,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/epe-dashboard:latest
+        tags: ShahDev007/epe-dashboard:latest
