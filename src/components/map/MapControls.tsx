@@ -1,4 +1,3 @@
-// src/components/map/MapControls.tsx
 import { useState } from "react";
 import { Search } from "lucide-react";
 

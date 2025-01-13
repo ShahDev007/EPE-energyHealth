@@ -57,8 +57,8 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="col-span-1 bg-white rounded-lg p-6 shadow-sm">
-          <h3 className="text-lg font-medium mb-4">Power Usage & Efficiency</h3>
+        <div className="col-span-1 bg-white rounded-lg p-6 pl-0 shadow-sm">
+          <h3 className="text-lg font-medium mb-4 ml-9">Power Usage & Efficiency</h3>
           <div className="h-[400px]">
             <ResponsiveContainer width="100%" height="130%">
               <LineChart data={powerUsageData}>

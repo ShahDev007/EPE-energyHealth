@@ -1,9 +1,8 @@
-// src/data/mock/infrastructureData.ts
 export interface PowerAsset {
   id: string;
   name: string;
   location: {
-    coordinates: [number, number]; // [longitude, latitude]
+    coordinates: [number, number]; 
   };
   type: "powerPlant" | "solarFarm" | "windFarm" | "substation";
   status: "operational" | "maintenance" | "offline";
@@ -19,7 +18,7 @@ export const powerAssets: PowerAsset[] = [
     id: "PP001",
     name: "Power Plant Alpha",
     location: {
-      coordinates: [-94.5786, 39.0997], // Kansas City
+      coordinates: [-94.5786, 39.0997], 
     },
     type: "powerPlant",
     status: "operational",

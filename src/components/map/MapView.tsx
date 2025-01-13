@@ -40,10 +40,9 @@ const InfrastructureMap = () => {
       container: mapRef.current,
       map: map,
       zoom: 5,
-      center: [-99.7, 31.5], // Centered on Texas
+      center: [-99.7, 31.5],
       popup: {
         dockEnabled: false,
-        // autoOpenEnabled: true,
         alignment: "top-center",
         defaultPopupTemplateEnabled: true,
         highlightEnabled: true,
@@ -58,7 +57,6 @@ const InfrastructureMap = () => {
         browserTouchPanEnabled: true,
       },
       highlightOptions: {
-        // color: [255, 255, 0, 0.3],
         haloOpacity: 0.9,
         fillOpacity: 0.2,
       },
@@ -139,7 +137,6 @@ const InfrastructureMap = () => {
       });
     };
 
-    // Create layers and add graphics
     const substationLayer = new GraphicsLayer({
       title: "Substations",
       listMode: "show",
@@ -291,12 +288,6 @@ const InfrastructureMap = () => {
       }
     });
 
-    // const layerList = new LayerList({
-    //   view: view,
-    // });
-
-    // view.ui.add(layerList, "top-right");
-
     return () => {
       view?.destroy();
     };
@@ -308,7 +299,6 @@ const InfrastructureMap = () => {
     const allLayers = [layers.substationLayer, layers.powerPlantLayer, layers.renewableLayer];
   
     if (!term) {
-      // Show all assets
       allLayers.forEach(layer => {
         layer.graphics.forEach(graphic => {
           graphic.visible = true;
@@ -317,7 +307,6 @@ const InfrastructureMap = () => {
       return;
     }
   
-    // Search through all graphics
     allLayers.forEach(layer => {
       layer.graphics.forEach(graphic => {
         const attributes = graphic.attributes;
