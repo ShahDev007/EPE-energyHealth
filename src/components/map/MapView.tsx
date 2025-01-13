@@ -189,7 +189,7 @@ const InfrastructureMap = () => {
       const point = new Point({
         longitude: asset.location.coordinates[0],
         latitude: asset.location.coordinates[1],
-        spatialReference: { wkid: 4326 }  // WGS84 spatial reference
+        spatialReference: { wkid: 4326 }  
       });
 
       const symbol = new SimpleMarkerSymbol({
