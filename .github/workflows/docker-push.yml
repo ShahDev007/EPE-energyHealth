@@ -3,14 +3,18 @@ name: Docker Push
 on:
   push:
     branches:
-      - main 
+      - main
 
 jobs:
   docker:
     runs-on: ubuntu-latest
+    environment: Prod - EPE  # Add this line to use the environment
     steps:
-      - name: Checkout code
+      - name: Check out repository
         uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
 
       - name: Login to Docker Hub
         uses: docker/login-action@v2
@@ -23,4 +27,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ShahDev007/epe-dashboard:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/epe-dashboard:latest
