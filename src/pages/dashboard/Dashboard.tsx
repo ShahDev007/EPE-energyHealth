@@ -52,7 +52,7 @@ const Dashboard = () => {
       {/* Map and Chart */}
       <div className="grid grid-cols-3 gap-4">
         <div className="col-span-2 bg-white rounded-lg p-2 shadow-sm">
-          <h3 className="text-lg font-medium mb-4">Infrastructure Map</h3>
+          <h3 className="text-lg font-medium mb-3 ml-2">Infrastructure Map</h3>
           <div className="h-[600px] mt-3">
             <InfrastructureMap />
           </div>
