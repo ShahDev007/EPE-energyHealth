@@ -168,7 +168,7 @@ const InfrastructureMap = () => {
 
     const getSymbolColor = (assetType: string, status: string) => {
       if (status !== "operational") {
-        return [255, 165, 0, 0.8]; // Orange for maintenance/offline
+        return [255, 165, 0, 0.8]; 
       }
       
       switch(assetType) {
