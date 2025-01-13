@@ -173,7 +173,7 @@ const InfrastructureMap = () => {
       
       switch(assetType) {
         case "powerPlant":
-          return [255, 0, 0, 0.8]; // Red for power plants
+          return [255, 0, 0, 0.8]; 
         case "solarFarm":
           return [255, 215, 0, 0.8]; // Gold for solar
         case "windFarm":
