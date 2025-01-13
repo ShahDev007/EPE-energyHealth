@@ -8,7 +8,7 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     environment: Prod - EPE
-    
+
     steps:
     - uses: actions/checkout@v2
 
@@ -23,4 +23,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/epe-dashboard:latest
+        tags: ShahDev007/epe-dashboard:latest
