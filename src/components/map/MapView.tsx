@@ -271,7 +271,7 @@ const InfrastructureMap = () => {
             }
           }
         ]
-      },
+      } as any,
       popupTemplate: {
         title: `<div style="margin-top: 28px;"><h1><b>{Name}</b></h1><div>`,
         content: [{
