@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Search } from "lucide-react";
+// import { Search } from "lucide-react";
 
 interface MapControlsProps {
   onSearch: (term: string) => void;
@@ -45,7 +45,7 @@ const MapControls = ({ onSearch, onFilterChange }: MapControlsProps) => {
             className="pl-7 pr-3 py-1.5 border rounded-md w-48 text-sm"
             onChange={(e) => onSearch(e.target.value)}
           />
-          <Search className="absolute left-2 top-2 h-3.5 w-3.5 text-gray-400" />
+          {/* <Search className="absolute left-2 top-2 h-3.5 w-3.5 text-gray-400" /> */}
         </div>
       </div>
 
