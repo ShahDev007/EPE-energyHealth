@@ -397,11 +397,20 @@ const InfrastructureMap = () => {
       },
     };
 
-    console.log(fuelTypeSymbols);
-
+    type FuelTypeSymbols = {
+      [key in 'DFO' | 'WAT' | 'NG' | 'BIT' | 'WO']: {
+        symbol: {
+          type: string;
+          color: number[];
+          size: number;
+        };
+      };
+    };
+    
+    // Now this should work without error
     const uniqueValueInfos = Object.keys(fuelTypeSymbols).map((fuelType) => ({
       value: fuelType,
-      symbol: fuelTypeSymbols[fuelType].symbol,
+      symbol: fuelTypeSymbols[fuelType as keyof FuelTypeSymbols].symbol,
     }));
 
     const powerPlantLayer = new FeatureLayer({
