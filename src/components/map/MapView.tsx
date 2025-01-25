@@ -106,7 +106,7 @@ const InfrastructureMap = () => {
             maxSize: 4,
           },
         ],
-      },
+      } as any,
       popupTemplate: {
         title: `<div style="margin-top: 28px;"><h1><b>{OWNER}</b></h1><div>`,
         content: [
@@ -227,7 +227,7 @@ const InfrastructureMap = () => {
     });
 
     // Querynig to find all types here
-    
+
     // const query = powerPlantLayer.createQuery();
     // query.outFields = ["PRIM_FUEL"];
     // query.returnDistinctValues = true;
